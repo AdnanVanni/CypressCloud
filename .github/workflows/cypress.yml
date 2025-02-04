@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        containers: [1, 2, 3] # Run tests in parallel on 3 machines
+        containers: [1, 2] # Run tests in parallel on 3 machines
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

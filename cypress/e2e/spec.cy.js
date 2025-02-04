@@ -1,7 +1,7 @@
 describe('Google Search Tests', () => {
   it('should load Google homepage', () => {
     cy.visit('https://www.google.com');
-    cy.title().should('include', 'Google');
+    cy.title().should('include','Google');
   });
 
   it('should display the search input field', () => {

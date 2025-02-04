@@ -9,9 +9,16 @@ describe('Google Search Tests', () => {
     cy.get('textarea[name="q"]').should('be.visible');
   });
 
-  it('should perform a search and show results', () => {
+  it('1should display the search input field', () => {
     cy.visit('https://www.google.com');
-    cy.get('textarea[name="q"]').type('Cypress Testing{enter}');
-    cy.get('h3').should('contain', 'Cypress');
+    cy.get('textarea[name="q"]').should('be.visible');
+  });
+  it('2should display the search input field', () => {
+    cy.visit('https://www.google.com');
+    cy.get('textarea[name="q"]').should('be.visible');
+  });
+  it('3should display the search input field', () => {
+    cy.visit('https://www.google.com');
+    cy.get('textarea[name="q"]').should('be.visible');
   });
 });

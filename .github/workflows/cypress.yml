@@ -5,8 +5,9 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false  # Continue running other machines even if one fails
       matrix:
-        containers: [1, 2, 3] # Run tests in parallel on 3 machines
+        containers: [1, 2, 3]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +20,11 @@ jobs:
         with:
           record: true
           parallel: true
-          group: "Run on ${{ matrix.containers }} machines"
-          ci-build-id: ${{ github.run_id }}
+          group: 'Parallel Tests'
+          ci-build-id: ${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}
+          command: npx cypress run --record --parallel --browser chrome
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Add your Cypress record key to GitHub Secrets
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Split tests based on spec files
+          CYPRESS_GROUP: ${{ strategy.job-index }}
+          CYPRESS_GROUP_COUNT: ${{ strategy.job-total }}
